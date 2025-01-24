@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #121212, #1e1e1e);
+            color: #e0e0e0;
+            font-family: 'Inter', 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #4a9fff;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .add-book-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4a9fff, #2980b9);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .add-book-btn:hover {
+            background: linear-gradient(135deg, #2980b9, #4a9fff);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .book-list {
+            list-style-type: none;
+            width: 100%;
+        }
+
+        .book-item {
+            background-color: #252525;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .book-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .book-details {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .book-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .book-actions a {
+            color: #4a9fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .book-actions a:first-child {
+            background-color: rgba(74, 159, 255, 0.2);
+        }
+
+        .book-actions a:last-child {
+            background-color: rgba(255, 74, 74, 0.2);
+            color: #ff4a4a;
+        }
+
+        .book-actions a:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 600px) {
+            .book-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .book-actions {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Book List</h1>
+        <a href="/create/" class="add-book-btn">Add Book</a>
+        <ul class="book-list">
+            {% for book in books %}
+            <li class="book-item">
+                <div class="book-details">
+                    {{ book.title }} by {{ book.author }} ({{ book.publication_date }})
+                </div>
+                <div class="book-actions">
+                    <a href="/update/{{ book.id }}/">Edit</a>
+                    <a href="/delete/{{ book.id }}/">Delete</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
